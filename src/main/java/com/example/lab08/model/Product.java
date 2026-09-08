@@ -24,6 +24,9 @@ public class Product {
     private Double price;
 
     private String discountType;
+    
+    @Transient
+    private Double discountedPrice;
 
     // 1 Product : 1 ProductDetail
     @OneToOne(cascade = CascadeType.ALL)
@@ -115,6 +118,13 @@ public class Product {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+    public Double getDiscountedPrice() {
+        return discountedPrice;
+    }
+
+    public void setDiscountedPrice(Double discountedPrice) {
+        this.discountedPrice = discountedPrice;
     }
 
     public void addReview(Review review) {

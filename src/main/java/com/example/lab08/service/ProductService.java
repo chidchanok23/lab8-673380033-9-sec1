@@ -21,8 +21,14 @@ public class ProductService {
     }
 
     public List<Product> findAll() {
-        return productRepository.findAll();
+    List<Product> products = productRepository.findAll();
+
+    for (Product product : products) {
+        product.setDiscountedPrice(calculateFinalPrice(product));
     }
+
+    return products;
+}
 
     public Product findById(Long id) {
         return productRepository.findById(id)
