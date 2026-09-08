@@ -24,25 +24,45 @@ public class Product {
     private Double price;
 
     private String discountType;
-    
+
+    /*
+     * ราคาหลังหักส่วนลด
+     * ไม่สร้าง column ใน database
+     */
     @Transient
     private Double discountedPrice;
 
-    // 1 Product : 1 ProductDetail
+    // =========================
+    // 1:1 Product -> ProductDetail
+    // =========================
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "detail_id", referencedColumnName = "id")
+    @JoinColumn(
+            name = "detail_id",
+            referencedColumnName = "id"
+    )
     private ProductDetail detail;
 
-    // 1 Product : Many Reviews
+    // =========================
+    // 1:N Product -> Review
+    // =========================
+
     @OneToMany(
             mappedBy = "product",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.ALL
     )
     private List<Review> reviews = new ArrayList<>();
 
+    // =========================
+    // Constructor
+    // =========================
+
     public Product() {
     }
+
+    // =========================
+    // Getter / Setter
+    // =========================
 
     public Long getId() {
         return id;
@@ -100,25 +120,6 @@ public class Product {
         this.discountType = discountType;
     }
 
-    public ProductDetail getDetail() {
-        return detail;
-    }
-
-    public void setDetail(ProductDetail detail) {
-        this.detail = detail;
-
-        if (detail != null && detail.getProduct() != this) {
-            detail.setProduct(this);
-        }
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
     public Double getDiscountedPrice() {
         return discountedPrice;
     }
@@ -127,13 +128,19 @@ public class Product {
         this.discountedPrice = discountedPrice;
     }
 
-    public void addReview(Review review) {
-        reviews.add(review);
-        review.setProduct(this);
+    public ProductDetail getDetail() {
+        return detail;
     }
 
-    public void removeReview(Review review) {
-        reviews.remove(review);
-        review.setProduct(null);
+    public void setDetail(ProductDetail detail) {
+        this.detail = detail;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

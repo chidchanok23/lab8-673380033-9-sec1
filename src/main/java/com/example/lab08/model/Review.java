@@ -16,18 +16,28 @@ public class Review {
 
     private Integer rating;
 
-    @Column(length = 1000)
     private String comment;
 
     private LocalDate reviewDate;
 
-    // Many Reviews : 1 Product
-    @ManyToOne(fetch = FetchType.LAZY)
+    // =========================
+    // N:1 Review -> Product
+    // =========================
+
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
+    // =========================
+    // Constructor
+    // =========================
+
     public Review() {
     }
+
+    // =========================
+    // Getter / Setter
+    // =========================
 
     public Long getId() {
         return id;
