@@ -21,10 +21,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-    // =========================
-    // READ
-    // GET /products
-    // =========================
 
     @GetMapping
     public String list(Model model) {
@@ -37,10 +33,6 @@ public class ProductController {
         return "products/list";
     }
 
-    // =========================
-    // ADD FORM
-    // GET /products/add
-    // =========================
 
     @GetMapping("/add")
     public String add(Model model) {
@@ -58,10 +50,6 @@ public class ProductController {
         return "products/add";
     }
 
-    // =========================
-    // SAVE
-    // POST /products/save
-    // =========================
 
     @PostMapping("/save")
     public String save(@ModelAttribute Product product) {
@@ -71,10 +59,6 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    // =========================
-    // EDIT FORM
-    // GET /products/edit/{id}
-    // =========================
 
     @GetMapping("/edit/{id}")
     public String edit(
@@ -93,10 +77,6 @@ public class ProductController {
         return "products/edit";
     }
 
-    // =========================
-    // UPDATE
-    // POST /products/update/{id}
-    // =========================
 
     @PostMapping("/update/{id}")
     public String update(
@@ -109,10 +89,6 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    // =========================
-    // DELETE PAGE
-    // GET /products/delete/{id}
-    // =========================
 
     @GetMapping("/delete/{id}")
     public String deletePage(
@@ -131,10 +107,6 @@ public class ProductController {
         return "products/delete";
     }
 
-    // =========================
-    // DELETE
-    // POST /products/delete/{id}
-    // =========================
 
     @PostMapping("/delete/{id}")
     public String delete(
